@@ -1,0 +1,83 @@
+@use 'colors';
+@use 'themes';
+@use 'theme_button';
+@use 'contact_links';
+
+@use 'terminal';
+
+body {
+	overflow: hidden;
+
+	font-family: 'Fira Code', monospace;
+}
+
+// TODO do we need this?
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
+
+main {
+	display: flex;
+	position: relative;
+	
+	height: 100vh;
+	overflow: hidden;
+	width: fit-content;
+
+	transition: transform 0.6s;
+
+	&.terminal-showing {
+		transform: translate(0);
+	}
+
+	&.standard-showing {
+		transform: translate(-100vw);
+	}
+
+	#standard-site {
+		transition: color 0.2s, background-color 0.2s;
+		box-sizing: border-box;
+		display: flex;
+		height: 100%;
+		width: 100vw;
+
+		#standard-content {
+			width: 80vw;
+			height: 400vh;
+		
+			transition: transform 0.6s;
+		
+			&.about {
+				transform: translate(0);
+			}
+			&.skills {
+				transform: translate(0, -100vh);
+			}
+			&.experience {
+				transform: translate(0, -200vh);
+			}
+			&.projects {
+				transform: translate(0, -300vh);
+			}
+			
+			.standard-section {
+				min-width: 80vw;
+				height: 100vh;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

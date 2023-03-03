@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="https://kit.fontawesome.com/88d08e29d0.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/style.css">
+  <script src="dist/main.js" defer></script>
+  <title>JSTerminal</title>
+  <link rel="icon" type="image/x-icon" href="terminal_icon.png">
+</head>
+<body>
+  <button id="theme-button" class="dark"><i class="fas fa-sun"></i></button>
+
+  <div id="contact-links" class="dark">
+    <a id="gh-link" href="https://github.com/jliversi" target="_blank">
+        <span>Github</span>
+        <i class="devicon-github-original"></i>
+    </a>
+    <a id="li-link" href="https://www.linkedin.com/in/jliversi/" target="_blank">
+        <span>LinkedIn</span>
+        <i class="devicon-linkedin-plain"></i>
+    </a>
+    <a id="gm-link" href="mailto:jliversi.dev@gmail.com">
+        <span>jliversi.dev
+          @gmail.com</span>
+        <i class="fa-solid fa-envelope"></i>
+    </a>
+  </div>
+
+  <main id="main-window" class="dark">
+    <div id="terminal" tabindex="-1">
+      <div id="terminal-container">
+        <div class="output-block"></div>
+        <div id="input-container">
+          <span class="emphasis prompt">/Users/jliversi:$</span><div id="input1" class="input"></div><span id="caret"> </span><div id="input2" class="input"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
