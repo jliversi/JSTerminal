@@ -65,8 +65,8 @@ function createTextEleFromInput(settings) {
     const outputPrompt = document.createElement("span");
     outputPrompt.classList.add("prompt");
     outputPrompt.classList.add("emphasis");
-    // outputPrompt.innerHTML = settings.dir + ':$';
-    outputPrompt.innerHTML = "/Users/jliversi" + ':$';
+    outputPrompt.innerHTML = `jal@localhost:${settings.dir}:$`;
+    // outputPrompt.innerHTML = "/Users/jliversi" + ':$'; // TODO change this to the directory
     const outputInput = document.createElement("span");
     outputInput.innerHTML = escapeHtml(settings.inputText);
     newDiv.appendChild(outputPrompt);
@@ -107,24 +107,8 @@ function welcome_fn() {
    outputText(welcomeText); 
 }
 
-function about_fn() {
-   outputText(aboutText); 
-}
-
-function skills_fn() {
-    outputText(skillsText);
-}
-
-function experience_fn() {
-    outputText(experienceText);
-}
-
 function credits_fn() {
     outputText(creditsText);
-}
-
-function resume_fn() {
-    outputText(resumeText);
 }
 
 function contact_fn() {
@@ -139,20 +123,25 @@ function echo_fn(...args) {
     outputText(args.join(" "));
 }
 
+function cd_fn(...args) {
+    // Needs to change the prompt as well
+}
+
+function ls_fn(...args) {
+
+}
+
+function cat_fn(...args) {
+
+}
+
 function theme_fn(settings) {
+    // TODO this just needs to check the checkbox
     const toggle_fn = toggleTheme(settings);
     return function(arg) {
         if (arg === settings.theme) {
             return;
         }
-        toggle_fn();
-    }
-}
-
-function standard_site_fn(settings) {
-    const toggle_fn = toggleModeToStandard(settings);
-
-    return function() {
         toggle_fn();
     }
 }
@@ -181,14 +170,8 @@ function build_command_map(settings) {
         // Prints constant text 
         help: help_fn,
         welcome: welcome_fn,
-        about: about_fn,
-        skills: skills_fn,
-        experience: experience_fn,
         credits: credits_fn,
         sudo: sudo_fn,
-        
-        // Prints constant text but including links
-        resume: resume_fn,
         contact: contact_fn,
         
         // // Functional in site
@@ -198,7 +181,6 @@ function build_command_map(settings) {
         // quit: exit_fn(settings),
     
         echo: echo_fn,
-        // projects: projects_fn, // TODO
     };
 }
 

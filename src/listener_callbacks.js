@@ -47,34 +47,34 @@ export function typeChar(settings) {
     }
 }
 
-export function toggleTheme(settings) {
-    const button = getThemeButton();
-    const icon = button.children[0];
-    const main = getMain();
-    const contactLinks = getContactLinks();
+// export function toggleTheme(settings) {
+//     const button = getThemeButton();
+//     const icon = button.children[0];
+//     const main = getMain();
+//     const contactLinks = getContactLinks();
 
-    return function() {
-        if (settings.animating) return;
-        settings.animating = true;
-        if (settings.theme === "dark") {
-            tradeClasses(main, "dark", "light");
-            tradeClasses(button, "dark", "light");
-            tradeClasses(contactLinks, "dark", "light");
+//     return function() {
+//         if (settings.animating) return;
+//         settings.animating = true;
+//         if (settings.theme === "dark") {
+//             tradeClasses(main, "dark", "light");
+//             tradeClasses(button, "dark", "light");
+//             tradeClasses(contactLinks, "dark", "light");
             
-            settings.theme = "light";
-            setTimeout(() => {
-                tradeClasses(icon, "fa-sun", "fa-moon");
-                settings.animating = false;
-            },  200);
-        } else {
-            tradeClasses(main, "light", "dark");
-            tradeClasses(contactLinks, "light", "dark");
+//             settings.theme = "light";
+//             setTimeout(() => {
+//                 tradeClasses(icon, "fa-sun", "fa-moon");
+//                 settings.animating = false;
+//             },  200);
+//         } else {
+//             tradeClasses(main, "light", "dark");
+//             tradeClasses(contactLinks, "light", "dark");
 
-            settings.theme = "dark";
-            setTimeout(() => {
-                settings.animating = false;
-                tradeClasses(icon, "fa-moon", "fa-sun");
-            },  200);
-        }
-    }
-}
+//             settings.theme = "dark";
+//             setTimeout(() => {
+//                 settings.animating = false;
+//                 tradeClasses(icon, "fa-moon", "fa-sun");
+//             },  200);
+//         }
+//     }
+// }

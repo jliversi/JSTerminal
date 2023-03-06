@@ -1,5 +1,5 @@
-import { toggleTheme, typeChar } from "./listener_callbacks";
-import { getTerminal, getThemeButton } from "./selectors";
+import { typeChar } from "./listener_callbacks";
+import { getTerminal } from "./selectors";
 import { setupWelcomeMessage } from "./ui";
 
 // TODO check if on mobile and in that case only go to non-terminal site
@@ -13,7 +13,7 @@ const settings = {
     cursorIdx: 0,
     commandHistory: [""],
     commandIdx: 0,
-    // dir: "/Users/jliversi",
+    dir: "~",
 }
 
 // Run setup functions
@@ -32,8 +32,6 @@ window.addEventListener("resize", () => {
 });
 
 // Callback listeners
-const themeButton = getThemeButton();
-themeButton.addEventListener("click", toggleTheme(settings));
 const terminalContainer = getTerminal();
 terminalContainer.addEventListener('keydown', typeChar(settings));
 terminalContainer.focus();

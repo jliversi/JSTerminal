@@ -30,104 +30,85 @@
   color: #268bd2 !important;
 }
 
-main.dark .mode-button {
-  color: #839496;
-}
-main.dark .emphasis {
+#theme-checkbox:not(:checked) ~ main .emphasis {
   color: #93a1a1;
   font-weight: 800;
 }
-main.dark #terminal {
+#theme-checkbox:not(:checked) ~ main #terminal {
   background-color: #002b36;
   color: #839496;
 }
-main.dark #terminal #caret {
+#theme-checkbox:not(:checked) ~ main #terminal #caret {
   animation: blinker-d 0.6s step-end infinite;
 }
-main.dark #terminal a {
+#theme-checkbox:not(:checked) ~ main #terminal a {
   color: #839496;
 }
-main.dark #terminal a:visited {
+#theme-checkbox:not(:checked) ~ main #terminal a:visited {
   color: #839496;
 }
-main.light #contact-links a {
-  color: #657b83;
-}
-main.light #contact-links a:visited {
-  color: #657b83;
-}
-main.light .emphasis {
+#theme-checkbox:checked ~ main .emphasis {
   color: #586e75;
   font-weight: 800;
 }
-main.light #terminal {
+#theme-checkbox:checked ~ main #terminal {
   background-color: #fdf6e3;
   color: #657b83;
 }
-main.light #terminal #caret {
+#theme-checkbox:checked ~ main #terminal #caret {
   animation: blinker-l 0.6s step-end infinite;
 }
-main.light #terminal a {
+#theme-checkbox:checked ~ main #terminal a {
   color: #657b83;
 }
-main.light #terminal a:visited {
+#theme-checkbox:checked ~ main #terminal a:visited {
   color: #657b83;
 }
 
-@keyframes rotate-away {
-  0% {
-    transform: rotate3d(0, 1, 0, 0);
-  }
-  100% {
-    transform: rotate3d(0, 1, 0, 90deg);
-  }
-}
-@keyframes rotate-in {
-  0% {
-    transform: rotate3d(0, 1, 0, 90deg);
-  }
-  100% {
-    transform: rotate3d(0, 1, 0, 0);
-  }
-}
-#theme-button {
+#theme-checkbox {
+  height: 3em;
+  width: 3em;
+  position: absolute;
+  z-index: 101;
+  top: 23px;
+  right: 43px;
   cursor: pointer;
-  z-index: 1000;
-  height: 30px;
-  width: 30px;
+  opacity: 0;
+}
+#theme-checkbox:checked ~ #theme-button > div {
+  right: 1em;
+}
+#theme-checkbox:not(:checked) ~ #theme-button > div {
+  right: 0;
+}
+
+#theme-button {
+  overflow: hidden;
+  z-index: 100;
+  font-size: 2em;
   position: fixed;
-  bottom: 50px;
+  top: 30px;
   right: 50px;
   font-family: "Font Awesome 6 Free";
-  font-size: 30px;
-  transition: transform 0.2s, right 0.6s;
 }
-#theme-button.light .fa-sun {
+#theme-button > div {
+  width: 1em;
+  display: flex;
+  position: relative;
+  transition: right 0.6s ease;
+}
+#theme-button .fa-sun {
   color: #b58900;
-  animation-name: rotate-away;
-  animation-duration: 0.2s;
 }
-#theme-button.light .fa-moon {
+#theme-button .fa-moon {
   color: #6c71c4;
-  animation-name: rotate-in;
-  animation-duration: 0.2s;
-}
-#theme-button.dark .fa-moon {
-  color: #6c71c4;
-  animation-duration: 0.2s;
-  animation-name: rotate-away;
-}
-#theme-button.dark .fa-sun {
-  color: #b58900;
-  animation-name: rotate-in;
-  animation-duration: 0.2s;
 }
 
 #contact-links {
   width: 30px;
   position: fixed;
   right: 50px;
-  bottom: 95px;
+  bottom: 30px;
   z-index: 1000;
   display: flex;
   flex-direction: column;

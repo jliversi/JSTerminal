@@ -1,9 +1,6 @@
 
 export function getMain() { return document.getElementById("main-window"); };
 
-export function getThemeButton() { return document.getElementById("theme-button"); }
-export function getContactLinks() { return document.getElementById("contact-links"); }
-
 export function getTerminal() { return document.getElementById("terminal"); };
 export function getTerminalContainer() { return document.getElementById("terminal-container"); };
 

@@ -1,63 +1,53 @@
 @use 'colors';
 
-main {
-    // Theme differences
-	&.dark {
-
-		.mode-button {
-			color: colors.$d-text1;
-		}
-		.emphasis {
-			color: colors.$d-text2;
-			font-weight: 800;
-		}
-		#terminal {
-			background-color: colors.$d-bg;
-			color: colors.$d-text1;
-
-			#caret  {
-				animation: blinker-d .6s step-end infinite;
+#theme-checkbox {
+    // Theme differences, checked=light, unchecked=dark
+	&:not(:checked) {
+		~ main {
+			.emphasis {
+				color: colors.$d-text2;
+				font-weight: 800;
 			}
-
-			a {
+			#terminal {
+				background-color: colors.$d-bg;
 				color: colors.$d-text1;
-				&:visited {
+	
+				#caret  {
+					animation: blinker-d .6s step-end infinite;
+				}
+	
+				a {
 					color: colors.$d-text1;
-				} 
-			}
-		}
-	}
-
-	&.light {
-		#contact-links {
-			a {
-				color: colors.$l-text1;
-				&:visited {
-					color: colors.$l-text1;
+					&:visited {
+						color: colors.$d-text1;
+					} 
 				}
 			}
 		}
-		.emphasis {
-			color: colors.$l-text2;
-			font-weight: 800;
-		}
-
-		#terminal {
-			background-color: colors.$l-bg;
-			color: colors.$l-text1;
-
-
-			#caret  {
-				animation: blinker-l .6s step-end infinite;
+	}
+	&:checked {
+		~ main {
+			.emphasis {
+				color: colors.$l-text2;
+				font-weight: 800;
 			}
-
-			a {
+	
+			#terminal {
+				background-color: colors.$l-bg;
 				color: colors.$l-text1;
-				&:visited {
+	
+	
+				#caret  {
+					animation: blinker-l .6s step-end infinite;
+				}
+	
+				a {
 					color: colors.$l-text1;
-				} 
+					&:visited {
+						color: colors.$l-text1;
+					} 
+				}
 			}
 		}
 	}
 }
-
