@@ -1,7 +1,6 @@
-import { getCaret, getInput1, getInput2, getInputContainer, getTerminal, getOutputBlocks, getInputBlocks, getTerminalContainer } from "./selectors";
-import { aboutText, contactText, creditsText, experienceText, helpText, resumeText, skillsText, sudoText, welcomeText } from "./constants";
+import { getCaret, getInput1, getInput2, getInputContainer, getThemeCheckbox, getOutputBlocks, getInputBlocks, getTerminalContainer, getPromptDir } from "./selectors";
+import { contactText, creditsText, helpText, sudoText, welcomeText } from "./constants";
 import { escapeHtml } from "./ui";
-import { toggleTheme } from "./listener_callbacks";
 
 
 // Terminal input functions
@@ -65,7 +64,7 @@ function createTextEleFromInput(settings) {
     const outputPrompt = document.createElement("span");
     outputPrompt.classList.add("prompt");
     outputPrompt.classList.add("emphasis");
-    outputPrompt.innerHTML = `jal@localhost:${settings.dir}:$`;
+    outputPrompt.innerHTML = `jal@localhost:${settings.dirName}:$`;
     // outputPrompt.innerHTML = "/Users/jliversi" + ':$'; // TODO change this to the directory
     const outputInput = document.createElement("span");
     outputInput.innerHTML = escapeHtml(settings.inputText);
@@ -123,43 +122,116 @@ function echo_fn(...args) {
     outputText(args.join(" "));
 }
 
-function cd_fn(...args) {
-    // Needs to change the prompt as well
+function pwd_fn(settings) {
+    return function(...args) {
+        outputText(settings.dirName.replace('~', '/Users/jal'));
+    }
 }
 
-function ls_fn(...args) {
-
+function dirFilterBuilder(curDir) {
+    return function(dir_name) {
+        return typeof curDir[dir_name] === 'object';
+    }
 }
 
-function cat_fn(...args) {
+function cd_fn(settings) {
+    const promptDir = getPromptDir();
+    return function(arg) {
+        if (arg === '.' || !arg) {
+            return;
+        }
+        const dirFilter = dirFilterBuilder(settings.curDir);
+        const dir_names = Object.keys(settings.curDir).filter(dirFilter);
+        if (dir_names.includes(arg)) {
+            const newDir = settings.curDir[arg];
+            const newDirName = newDir.DIR_NAME;
+            settings.curDir = newDir;
+            settings.dirName = newDirName;
+            promptDir.innerHTML = 'jal@localhost:' + settings.dirName + ':$';
 
+        } else if (Object.keys(settings.curDir).includes(arg)) {
+            const outputString = `cd: not a directory: ${arg}`;
+            outputText(outputString);
+        } else {
+            const outputString = `cd: no such file or directory: ${arg}`;
+            outputText(outputString);
+        }
+    }
+}
+
+function buildLsOutput(names, dir_names) {
+    let result = `\
+<span class="emphasis">.</span>
+`;
+    for (let i = 0; i < names.length; i++) {
+        const name = names[i];
+        if (name === 'DIR_NAME') continue;
+        if (dir_names.includes(name)) {
+            result += `<span class="emphasis">${name}</span>\n`
+        } else {
+            result += `${name}\n`
+        }
+    }
+
+    return result;
+}
+
+function ls_fn(settings) {
+    return function(arg) {
+        if (!arg || arg === '.') {
+            const dirFilter = dirFilterBuilder(settings.curDir);
+            const dir_names = Object.keys(settings.curDir).filter(dirFilter);
+            const outputString = buildLsOutput(Object.keys(settings.curDir).sort(), dir_names);
+            outputText(outputString);
+            return;
+        }
+
+        const dirFilter = dirFilterBuilder(settings.curDir);
+        const dir_names = Object.keys(settings.curDir).filter(dirFilter);
+        if (dir_names.includes(arg)) {
+            const dirToUse = settings.curDir[arg];
+            const dirFilter = dirFilterBuilder(dirToUse);
+            const dir_names = Object.keys(dirToUse).filter(dirFilter);
+            const outputString = buildLsOutput(Object.keys(dirToUse).sort(), dir_names);
+            outputText(outputString);
+
+        } else {
+            const outputString = `ls: ${arg}: no such file or directory`;
+            outputText(outputString);
+        }
+    }
+}
+
+function cat_fn(settings) {
+    return function(arg) {
+        if (!arg) return;
+        const dirFilter = dirFilterBuilder(settings.curDir);
+        const dir_names = Object.keys(settings.curDir).filter(dirFilter);
+        if (dir_names.includes(arg)) {
+            const outputString = `cat: ${arg}: Is a directory`;
+            outputText(outputString);
+        } else if (Object.keys(settings.curDir).includes(arg)) {
+            outputText(settings.curDir[arg]);
+        } else {
+            const outputString = `cat: ${arg}: No such file or directory`;
+            outputText(outputString);
+        }
+    }
 }
 
 function theme_fn(settings) {
-    // TODO this just needs to check the checkbox
-    const toggle_fn = toggleTheme(settings);
+    const checkbox = getThemeCheckbox();
     return function(arg) {
         if (arg === settings.theme) {
             return;
         }
-        toggle_fn();
-    }
-}
-
-function exit_fn(settings) {
-    const toggle_fn = toggleModeToStandard(settings);
-    const inputContainer = getInputContainer();
-    const terminal = getTerminalContainer();
-
-    return function() {
-        toggle_fn();
-        setTimeout(() => {
-            clear_fn();
-            const outputBlock = createOutputBlock();
-            outputBlock.innerHTML = welcomeText;
-            terminal.insertBefore(outputBlock, inputContainer);
-            terminal.scrollTop = terminal.scrollHeight;
-        }, 600);
+        if (settings.theme === "dark") {
+            settings.theme = "light"
+            checkbox.checked = true;
+        } else {
+            settings.theme = "dark";
+            checkbox.checked = false;
+        }
     }
 }
 
@@ -174,13 +246,12 @@ function build_command_map(settings) {
         sudo: sudo_fn,
         contact: contact_fn,
         
-        // // Functional in site
-        // theme: theme_fn(settings),
-        // switch: standard_site_fn(settings),
-        // exit: exit_fn(settings),
-        // quit: exit_fn(settings),
-    
+        theme: theme_fn(settings),
         echo: echo_fn,
+        pwd: pwd_fn(settings),
+        cd: cd_fn(settings),
+        ls: ls_fn(settings),
+        cat: cat_fn(settings),
     };
 }
 
@@ -216,3 +287,5 @@ export function buildRunCommand(settings) {
         processCommand(commandMap, commandString);
     }
 }
+
+

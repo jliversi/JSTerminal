@@ -3,13 +3,9 @@ export const typableCharacters = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST
 export const welcomeText = `\
 Hi!
 
-My name is <span class="emphasis">Joshua Ashmall-Liversidge</span> and I make websites :)
-
-This site is a "pretend" text-based terminal in which you can run commands to learn more about me and and what I do.
+This site is a "pretend" text-based terminal.
 
 Type '<span class="emphasis">help</span>' to see a list of available commands.
-
-Or click in the <span class="emphasis">top right</span> for a more standard site.
 `;
 
 export const creditsText = `\
@@ -18,7 +14,7 @@ export const creditsText = `\
     Font: Fira Code
 
     Everything else on this site was built by me using HTML, CSS, and vanilla Javascript.
-    Source code: <a href="https://github.com/jliversi" target="_blank">TODO THIS NEEDS TO LINK TO JSTERMINAL REPO</a>
+    Source code here: <a href="https://github.com/jliversi/JSTerminal" target="_blank">https://github.com/jliversi/JSTerminal</a>
 `;
 
 export const contactText = `
@@ -35,7 +31,7 @@ ACCESS DENIED! (jk, but sudo won't do anything here)
 
 export const helpText = `\
     help            Prints this message
-    ls              Prints contents of current director
+    ls              Prints contents of current directory
     cat [filename]  Prints the contents of the provided file
     cd [dirname]    Change directories
     pwd             Print current working directory
@@ -62,7 +58,7 @@ LinkedIn: https://www.linkedin.com/in/jliversi/
 
 Email: jliversi.dev@gmail.com
 
-Source code: 
+Source code: https://github.com/jliversi/JSTerminal
 `;
 
 export const fileText = {
@@ -70,3 +66,23 @@ export const fileText = {
     sample2,
     contact_info: contact_file_txt,
 }
+
+const initialFileSetup = {
+    '~': {
+        'DIR_NAME': '~',
+        'sample.txt': fileText.sample,
+        'contact_info.txt': fileText.contact_info,
+        'folder_1': {
+            'DIR_NAME': '~/folder_1',
+            'sample2.txt': fileText.sample2,
+        },
+        'folder_2': {
+            'DIR_NAME': '~/folder_2',
+        }
+    },
+}
+
+initialFileSetup['~']['folder_1']['..'] = initialFileSetup['~'];
+initialFileSetup['~']['folder_2']['..'] = initialFileSetup['~'];
+
+export const fileSetup = initialFileSetup;

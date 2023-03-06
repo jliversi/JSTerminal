@@ -3,13 +3,10 @@ import { getAboutBtn,
     getCaret,
     getInput1,
     getInput2,
-    getMain,
-    getThemeButton,
-    getContactLinks
 } from "./selectors";
 
 import { buildRunCommand, cursorLeft, cursorRight, deleteChar, insertChar, prevCommand, nextCommand } from "./terminal_logic";
-import { renderInput, tradeClasses } from "./ui";
+import { renderInput } from "./ui";
 
 export function typeChar(settings) {
     const inputEle1 = getInput1();
@@ -46,35 +43,3 @@ export function typeChar(settings) {
         }
     }
 }
-
-// export function toggleTheme(settings) {
-//     const button = getThemeButton();
-//     const icon = button.children[0];
-//     const main = getMain();
-//     const contactLinks = getContactLinks();
-
-//     return function() {
-//         if (settings.animating) return;
-//         settings.animating = true;
-//         if (settings.theme === "dark") {
-//             tradeClasses(main, "dark", "light");
-//             tradeClasses(button, "dark", "light");
-//             tradeClasses(contactLinks, "dark", "light");
-            
-//             settings.theme = "light";
-//             setTimeout(() => {
-//                 tradeClasses(icon, "fa-sun", "fa-moon");
-//                 settings.animating = false;
-//             },  200);
-//         } else {
-//             tradeClasses(main, "light", "dark");
-//             tradeClasses(contactLinks, "light", "dark");
-
-//             settings.theme = "dark";
-//             setTimeout(() => {
-//                 settings.animating = false;
-//                 tradeClasses(icon, "fa-moon", "fa-sun");
-//             },  200);
-//         }
-//     }
-// }

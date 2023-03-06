@@ -20,9 +20,18 @@
         height: 30px;
         margin: 15px 10px 0 10px;
         box-sizing: border-box;
-        white-space: pre-line;
         &:hover {
             text-decoration: underline;
+        }
+    }
+    #gh-link {
+        span {
+            white-space: pre;
+        }
+    }
+    #gm-link {
+        span {
+            white-space: pre-line;
         }
     }
 
@@ -48,7 +57,7 @@
         }
 
         &#gh-link:hover {
-            width: 100px;
+            width: 150px;
         }
         &#li-link:hover {
             width: 130px;

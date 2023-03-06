@@ -127,10 +127,15 @@
   height: 30px;
   margin: 15px 10px 0 10px;
   box-sizing: border-box;
-  white-space: pre-line;
 }
 #contact-links span:hover {
   text-decoration: underline;
+}
+#contact-links #gh-link span {
+  white-space: pre;
+}
+#contact-links #gm-link span {
+  white-space: pre-line;
 }
 #contact-links a {
   height: 30px;
@@ -147,7 +152,7 @@
   margin: 0 10px;
 }
 #contact-links a#gh-link:hover {
-  width: 100px;
+  width: 150px;
 }
 #contact-links a#li-link:hover {
   width: 130px;

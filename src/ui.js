@@ -15,11 +15,6 @@ export function setupWelcomeMessage() {
     ele.innerHTML = welcomeText;
 }
 
-export function tradeClasses(ele, classToRemove, classToAdd) {
-    ele.classList.remove(classToRemove);
-    ele.classList.add(classToAdd);
-}
-
 export function renderInput(input1, input2, caret, { inputText, cursorIdx }) {
     let pt1 = escapeHtml(inputText.slice(0,cursorIdx));
     let pt2 = escapeHtml(inputText.slice(cursorIdx + 1));
@@ -29,4 +24,3 @@ export function renderInput(input1, input2, caret, { inputText, cursorIdx }) {
     input2.innerHTML = pt2;
     caret.innerHTML = cursorChar ? escapeHtml(cursorChar) : " ";
 }
-

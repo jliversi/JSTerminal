@@ -1,3 +1,4 @@
+import { fileSetup } from "./constants";
 import { typeChar } from "./listener_callbacks";
 import { getTerminal } from "./selectors";
 import { setupWelcomeMessage } from "./ui";
@@ -13,7 +14,9 @@ const settings = {
     cursorIdx: 0,
     commandHistory: [""],
     commandIdx: 0,
-    dir: "~",
+    dirName: "~",
+    files: fileSetup,
+    curDir: fileSetup['~'],
 }
 
 // Run setup functions
@@ -35,3 +38,7 @@ window.addEventListener("resize", () => {
 const terminalContainer = getTerminal();
 terminalContainer.addEventListener('keydown', typeChar(settings));
 terminalContainer.focus();
+
+
+// TODO REMOVE
+window.josh = settings;
