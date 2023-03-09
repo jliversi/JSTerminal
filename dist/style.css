@@ -131,7 +131,7 @@
 #contact-links span:hover {
   text-decoration: underline;
 }
-#contact-links #gh-link span {
+#contact-links #gh-link span, #contact-links #ms-link span {
   white-space: pre;
 }
 #contact-links #gm-link span {
@@ -154,8 +154,11 @@
 #contact-links a#gh-link:hover {
   width: 150px;
 }
-#contact-links a#li-link:hover {
-  width: 130px;
+#contact-links a#ms-link i {
+  padding: 0 2px;
+}
+#contact-links a#ms-link:hover {
+  width: 105px;
 }
 #contact-links a#gm-link:hover {
   width: 150px;

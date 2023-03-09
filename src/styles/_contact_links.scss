@@ -24,7 +24,7 @@
             text-decoration: underline;
         }
     }
-    #gh-link {
+    #gh-link, #ms-link {
         span {
             white-space: pre;
         }
@@ -59,8 +59,13 @@
         &#gh-link:hover {
             width: 150px;
         }
-        &#li-link:hover {
-            width: 130px;
+        &#ms-link {
+            i {
+                padding: 0 2px;
+            }
+            &:hover {
+                width: 105px;
+            }
         }
         &#gm-link:hover {
             width: 150px;
